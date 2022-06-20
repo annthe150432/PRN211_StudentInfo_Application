@@ -1,0 +1,141 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Project.Models;
+@{
+    String name = (String)ViewBag.name;
+    String phone = (String)ViewBag.phone;
+    String dob = (String)ViewBag.dob;
+    String born = (String)ViewBag.born;
+    Boolean gender = (bool)ViewBag.gender;
+    String address = (String)ViewBag.address;
+    String id = (String)ViewBag.id;
+    String doi = (String)ViewBag.doi;
+    String poi = (String)ViewBag.poi;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>FPT Portal</title>
+    <link rel="stylesheet" href="/edit_prof/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/edit_prof/assets/css/Contact-Form-Clean.css">
+    <link rel="stylesheet" href="/edit_prof/assets/css/Features-Clean.css">
+    <link rel="stylesheet" href="/edit_prof/assets/css/styles.css">
+</head>
+
+<body>
+    <h1 style="padding-left: 100px;"><br>FPT University Academic Portal<br><br></h1>
+    <nav class="navbar navbar-light navbar-expand-md border rounded shadow" style="background: rgb(96,242,252);">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Home</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav d-inline-flex float-right">
+                    <li class="nav-item shadow float-right"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">Information Access</a>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="/Home/Construction">Weekly Timetable</a><a class="dropdown-item" href="/Home/Construction">Exam Schedule</a></div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">Registration/Application</a>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="/Home/Construction">Suspend semester</a><a class="dropdown-item" href="/Home/Construction">Register Course</a><a class="dropdown-item" href="/Application/Create">Send Application</a><a class="dropdown-item" href="/Application/List">View Application</a></div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">Others</a>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="/Profile/Views">Student Profile</a><a class="dropdown-item" href="/Profile/Edit">Update Profile</a><a class="dropdown-item" href="/Home/Construction">Certificate</a></div>
+                    </li>
+                </ul>
+            </div>
+            <section style="width: 234px;height: 52px;padding-top: 13px;"><a class="text-monospace shadow d-inline-block" href="/Profile/Views" style="width: 76px;">Profile</a><a class="text-monospace shadow d-inline-block" href="#" style="width: 76px;">Campus</a><a class="text-monospace shadow d-inline-block" href="/Home/Logout" style="margin-left: 0px;width: 76px;">Logout</a></section>
+        </div>
+    </nav>
+    <section style="height: 90px;padding-left: 20px;padding-right: 20px;">
+        <h4 class="d-xl-flex justify-content-xl-center">Update</h4>
+        <p class="text-center d-xl-flex justify-content-xl-center"><br><em>Đây là những thông tin quan trọng, được nhà trường dùng để in bằng tốt nghiệp, bảng điểm tốt nghiệp và các chứng chỉ cấp cho sinh viên, ngoài ra còn để báo cáo các Bộ ngành liên quan nên sinh viên cần nhập thông tin đầy đủ, chính xác.</em><br><br></p>
+    </section>
+    <main style="border-right-width: 2.4px;height: 710px;padding-right: 50px;padding-left: 50px;">
+        @using (Html.BeginForm("EditProfile", "Profile", FormMethod.Post, new { id = "editform" }))
+        {
+            <div class="d-block d-xl-flex align-items-xl-center" style="width: 1200px;height: 70px;"><label class="d-inline-block d-xl-flex align-items-xl-center" style="width: 300px;">Họ và Tên:&nbsp;</label><input name="fullname" class="border rounded border-dark d-inline-block" type="text" style="height: 50px;width: 800px;" value="@name"></div>
+            <div class="d-block d-xl-flex align-items-xl-center" style="width: 1200px;height: 60px;"><label class="d-inline-block d-xl-flex align-items-xl-center" style="width: 300px;">Số điện thoại:&nbsp;</label><input name="phone" class="border rounded border-dark d-inline-block" type="text" style="height: 50px;width: 800px;" value="@phone"  onkeydown = "return ValidateNumber(this, event);" ></div>
+            <div class="d-block d-xl-flex align-items-xl-center" style="width: 1200px;height: 60px;"><label class="d-inline-block d-xl-flex align-items-xl-center" style="width: 300px;">Ngày sinh:&nbsp;</label><input name="dob" class="form-control-lg" type="date" style="margin-right: 100px;" value="@dob"><label style="margin-right: 100px;">Nơi sinh:&nbsp;</label><input name="born" class="border rounded border-dark" type="text" style="height: 50px;width: 300px;" value="@born"></div>
+            <div class="d-block d-xl-flex align-items-xl-center" style="width: 1200px;height: 70px;">
+                <label class="d-inline-block d-xl-flex align-items-xl-center" style="width: 300px;">Giới tính:&nbsp;</label>
+                @if (gender)
+                {
+                    <div class="form-check" style="width: 100px;"><input name="gender" class="form-check-input" type="radio" id="formCheck-1" checked="checked" value="male"><label class="form-check-label" for="formCheck-1">Male</label></div>
+                    <div class="form-check" style="width: 100px;"><input name="gender" class="form-check-input" type="radio" id="formCheck-2" value="female"><label class="form-check-label" for="formCheck-2">Female</label></div>
+                }
+                else
+                {
+                    <div class="form-check" style="width: 100px;"><input name="gender" class="form-check-input" type="radio" id="formCheck-1" value="male"><label class="form-check-label" for="formCheck-1">Male</label></div>
+                    <div class="form-check" style="width: 100px;"><input name="gender" class="form-check-input" type="radio" id="formCheck-2" checked="checked" value="female"><label class="form-check-label" for="formCheck-2">Female</label></div>
+                }
+
+            </div>
+            <div class="d-block d-xl-flex align-items-xl-center" style="width: 1200px;height: 70px;"><label class="d-inline-block d-xl-flex align-items-xl-center" style="width: 300px;">CMT/CCCD:&nbsp;</label><input name="id" class="border rounded border-dark d-inline-block" type="text" style="height: 50px;width: 800px;" value="@id"  onkeydown = "return ValidateNumber(this, event);" ></div>
+            <div class="d-block d-xl-flex align-items-xl-center" style="width: 1200px;height: 70px;"><label class="d-inline-block d-xl-flex align-items-xl-center" style="width: 300px;">Ngày cấp:&nbsp;</label><input name="doi" class="form-control-lg" type="date" style="margin-right: 100px;" value="@doi"><label style="margin-right: 101px;">Nơi cấp:&nbsp;</label><input name="poi" class="border rounded border-dark" type="text" style="height: 50px;width: 300px;" value="@poi"></div>
+            <div class="d-block d-xl-flex align-items-xl-center" style="width: 1200px;height: 70px;">
+                <label class="d-inline-block d-xl-flex align-items-xl-center" style="width: 300px;">Dân tộc:&nbsp;</label>
+                @Html.DropDownList("folks", null, new { @class = "border rounded border-dark form-control-lg", style = "width: 233px;margin-right: 100px;" })
+                <label style="margin-right: 98px;">Tôn giáo:&nbsp;</label>
+                @Html.DropDownList("religions", null, new { @class = "border rounded border-dark form-control-lg", style = "width: 300px;margin-right: 100px;" })
+                    
+            </div>
+            <div class="d-block d-xl-flex align-items-xl-center" style="width: 1200px;height: 70px;">
+                <label class="d-inline-block d-xl-flex align-items-xl-center" style="width: 300px;">Địa chỉ theo sổ hộ khẩu:&nbsp;</label>
+                    @Html.DropDownList("provinces", null, new { @class = "form-control-lg", style = "width: 240px;margin-right: 30px;", onchange= "ReloadCity();" })
+                    @Html.DropDownList("cities", null, new { @class="form-control-lg", style="width: 250px;margin-right: 30px;", onchange = "ReloadDistrict();" })
+                    @Html.DropDownList("districts", null, new { @class = "form-control-lg", style = "width: 250px;" })
+            </div>
+            <div class="d-block d-xl-flex align-items-xl-center" style="width: 1200px;height: 70px;"><label class="d-inline-block d-xl-flex align-items-xl-center" style="width: 300px;">Địa chỉ:&nbsp;</label><input name="address" class="border rounded border-dark d-inline-block" type="text" style="height: 50px;width: 800px;" value="@address"></div>
+            <button class="btn btn-outline-primary" type="button" style="margin-left: 839px;" onclick="SubmitForm();">Save</button>
+        }
+    </main>
+    <footer style="padding-right: 80px;padding-left: 80px;">
+        <p><strong>Mọi góp ý, thắc mắc xin liên hệ:&nbsp;</strong>Phòng dịch vụ sinh viên: Email:&nbsp;<a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a>. Điện thoại:&nbsp;<strong>(024)7308.13.13</strong><br></p>
+        <p class="d-lg-flex justify-content-lg-center">© Powered by&nbsp;<a href="http://fpt.edu.vn/">FPT University</a>&nbsp;|&nbsp;&nbsp;<a href="http://cms.fpt.edu.vn/">CMS</a>&nbsp;|&nbsp;&nbsp;<a href="http://library.fpt.edu.vn/">library</a>&nbsp;|&nbsp;&nbsp;<a href="http://library.books24x7.com/">books24x7</a><br></p>
+    </footer>
+    <script src="/edit_prof/assets/js/jquery.min.js"></script>
+    <script src="/edit_prof/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        function ValidateNumber(txt, evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 &&
+                (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+        function ReloadCity() {
+            $("#editform").attr("action", "/Profile/ReloadCity").submit();
+        }
+        function ReloadDistrict() {
+            $("#editform").attr("action", "/Profile/ReloadDistrict").submit();
+        }
+        function SubmitForm() {
+            $("#editform").attr("action", "/Profile/EditProfile").submit();
+        }
+        $(document).ready(function () {
+            const nextURL = 'http://localhost:53435/Profile/Edit';
+            const nextTitle = document.title;
+            const nextState = {};
+
+            // This will create a new entry in the browser's history, without reloading
+            window.history.pushState(nextState, nextTitle, nextURL);
+
+            // This will replace the current entry in the browser's history, without reloading
+            window.history.replaceState(nextState, nextTitle, nextURL);
+        });
+    </script>
+</body>
+
+</html>

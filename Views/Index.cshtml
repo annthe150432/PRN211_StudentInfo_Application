@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>FPT Portal</title>
+    <link rel="stylesheet" href="/index/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/index/assets/css/styles.css">
+</head>
+
+<body>
+    <h1 style="padding-left:100px;"><br>FPT University Academic Portal<br><br></h1>
+    <div class="container">
+        <div class="row" style="height: 150px;">
+            <div class="col-md-6 offset-lg-0 bg-light border-dark shadow">
+                <button class="btn btn-primary" type="button"><strong>Phụ huynh</strong><br></button>
+                <div style="height: 100px;margin: 0px;"><button class="btn btn-outline-primary btn-block text-left" type="button" style="margin: 0px;margin-right: 0px;margin-bottom: 0px;padding-right: 13px;width: 113.5px;height: 46px;margin-top: 29px;margin-left: 174px;">Đăng nhập</button></div>
+            </div>
+            <div class="col-md-6 bg-light border-dark shadow">
+                <button class="btn btn-primary" type="button" style="display: block"><strong>Sinh viên, Giảng viên, Cán bộ ĐH-FPT</strong><br /></button>
+                <div class="d-inline-block" style="height: 100px;">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary btn-block dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button" style="margin-top: 29px;height: 46px;">Select Campus</button>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="#" style="height: 24px;">Select Campus</a><a class="dropdown-item" href="#" style="height: 24px;">FU - Hòa Lạc</a><a class="dropdown-item" href="#" style="height: 24px;">FU - Hồ Chí Minh</a><a class="dropdown-item" href="#" style="height: 24px;">FU - Đà Nẵng</a><a class="dropdown-item" href="#" style="height: 24px;">FU - Cần Thơ</a></div>
+                    </div>
+                </div>
+                <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#login" style="margin-top: -5px;height: 46px;padding-right: 11px;margin-left: 42px;">Đăng nhập</button>
+            </div>
+        </div>
+    </div>
+    <footer style="padding-right: 80px;padding-left: 80px; padding-top:80px;">
+        <p class="d-lg-flex justify-content-lg-center">© Powered by&nbsp;<a href="http://fpt.edu.vn/">FPT University</a>&nbsp;|&nbsp;&nbsp;<a href="http://cms.fpt.edu.vn/">CMS</a>&nbsp;|&nbsp;&nbsp;<a href="http://library.fpt.edu.vn/">library</a>&nbsp;|&nbsp;&nbsp;<a href="http://library.books24x7.com/">books24x7</a><br></p>
+    </footer>
+    <div class="modal fade" role="dialog" tabindex="-1" id="login">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Title</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("Login", "Home"))
+                    {
+                        <div><label style="margin-right: 55px;">Username</label>@Html.TextBox("rollnumber")</div>
+                        <div><label style="margin-right: 60px;">Password</label>@Html.Password("raw_password")</div>
+                        <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
+                    }
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <script src="/index/assets/js/jquery.min.js"></script>
+    <script src="/index/assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

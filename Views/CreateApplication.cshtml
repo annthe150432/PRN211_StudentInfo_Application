@@ -1,0 +1,110 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Project.Models;
+@{
+    List<ApplicationType> types = (List<ApplicationType>) ViewBag.types;
+    String finance = ViewData["finance"] as String;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>FPT Portal</title>
+    <link rel="stylesheet" href="/create_app/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/create_appassets/css/Contact-Form-Clean.css">
+    <link rel="stylesheet" href="/create_appassets/css/styles.css">
+</head>
+
+<body>
+    <h1 style="padding-left: 100px;"><br>FPT University Academic Portal<br><br></h1>
+    <nav class="navbar navbar-light navbar-expand-md border rounded shadow" style="background: rgb(96,242,252);">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Home</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav d-inline-flex float-right">
+                    <li class="nav-item shadow float-right"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">Information Access</a>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="/Home/Construction">Weekly Timetable</a><a class="dropdown-item" href="/Home/Construction">Exam Schedule</a></div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">Registration/Application</a>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="/Home/Construction">Suspend semester</a><a class="dropdown-item" href="/Home/Construction">Register Course</a><a class="dropdown-item" href="/Application/Create">Send Application</a><a class="dropdown-item" href="/Application/List">View Application</a></div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">Others</a>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="/Profile/Views">Student Profile</a><a class="dropdown-item" href="/Profile/Edit">Update Profile</a><a class="dropdown-item" href="/Home/Construction">Certificate</a></div>
+                    </li>
+                </ul>
+            </div>
+            <section style="width: 234px;height: 52px;padding-top: 13px;"><a class="text-monospace shadow d-inline-block" href="/Profile/Views" style="width: 76px;">Profile</a><a class="text-monospace shadow d-inline-block" href="#" style="width: 76px;">Campus</a><a class="text-monospace shadow d-inline-block" href="/Home/Logout" style="margin-left: 0px;width: 76px;">Logout</a></section>
+        </div>
+    </nav>
+    <section style="height: 370px;padding-left: 80px;padding-right: 80px;">
+        <h2 style="height: 150px;"><br>Send an application to Academic Administration dept (Gửi đơn cho Phòng quản lý đào tạo)<br><br></h2>
+        <p><br><strong><em>Lưu ý: V/v gửi đơn/email đến Phòng TC&amp;QLĐT</em></strong><br><strong><em>Phòng TC&amp;QLĐT sẽ trả lời đơn/email của sinh viên trong vòng 48h (trừ đơn xin phúc tra, chuyển cơ sở; không tính ngày nghỉ). Để hạn chế SPAM, Phòng TC&amp;QLĐT sẽ giãn thời gian trả lời đơn/email có tính chất SPAM theo nguyên tắc: Khi sinh viên gửi N đơn/email (N&gt;1) cho cùng một yêu cầu thì thời gian trả lời trong vòng N x 48h. Vì vậy sinh viên cần cân nhắc trước khi gửi đơn/email với cùng một nội dung để nhận được trả lời/giải quyết nhanh nhất theo quy định.</em></strong><br><br></p>
+        <p class="text-center">Account balance (Số dư tài khoản):&nbsp;<strong>@finance</strong>&nbsp;VNĐ<br></p>
+    </section>
+    <main style="height: 450px;">
+        <section class="contact-clean" style="padding-left: 80px;">
+            <p style="color:red; display: none" id="alertType">Please choose application type</p>
+            <p style="color:red; display: none" id="alertPurpose">Please provide the purpose</p>
+            @using (Html.BeginForm("AddApplication", "Application", FormMethod.Post, new { id = "form", EncType = "multipart/form-data" }))
+            {
+                <div class="d-inline-block">
+                    <label class="d-inline-block" style="width: 200px;">Application Type:&nbsp;</label>
+                    <select id="typeSelect" name="tid">
+                        <option value="0" selected="">Choose Application Type (Chọn loại đơn)</option>
+                        @foreach (var type in types)
+                        {
+                            <option value="@type.Id">@type.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="d-lg-flex align-items-lg-start"><label class="d-flex d-lg-flex" style="width: 200px;">Purpose:&nbsp;</label><textarea name="purpose" id="purpose" class="form-control-lg d-lg-flex justify-content-lg-center align-items-lg-start" rows="200" cols="70" style="height: 138px;"></textarea></div>
+                <div style="margin-top: 11px;">
+                    <label style="width: 200px;">File Attach:&nbsp;</label><input asp-for="FileUpload.FormFile" name="file" type="file" accept=".xlsx,.pdf,.docx,.doc,.xls,.jpg,.png,.zip">
+                    <div class="d-lg-flex justify-content-lg-center" style="margin-right: 0px;padding-right: 0px;">
+                        <p style="padding-right: 0px;">Extension File: "xlsx", "pdf", "docx", "doc", "xls", "jpg", "png","zip" =&gt; Template&nbsp;<a href="https://fap.fpt.edu.vn/temp/pdf/AppTemplate.zip">Click here</a><br></p>
+                    </div>
+                </div>
+                <div class="d-lg-flex justify-content-lg-center" style="margin-top: 45px;"><button class="btn btn-primary" type="button" onclick="onSave()">Send</button></div>
+            }
+        </section>
+    </main>
+    <footer style="padding-right: 80px;padding-left: 80px;">
+        <p><strong>Mọi góp ý, thắc mắc xin liên hệ:&nbsp;</strong>Phòng dịch vụ sinh viên: Email:&nbsp;<a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a>. Điện thoại:&nbsp;<strong>(024)7308.13.13</strong><br></p>
+        <p class="d-lg-flex justify-content-lg-center">© Powered by&nbsp;<a href="http://fpt.edu.vn/">FPT University</a>&nbsp;|&nbsp;&nbsp;<a href="http://cms.fpt.edu.vn/">CMS</a>&nbsp;|&nbsp;&nbsp;<a href="http://library.fpt.edu.vn/">library</a>&nbsp;|&nbsp;&nbsp;<a href="http://library.books24x7.com/">books24x7</a><br></p>
+    </footer>
+    <script src="/create_appassets/js/jquery.min.js"></script>
+    <script src="/create_appassets/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        function onSave() {
+            var e = document.getElementById("typeSelect");
+            var selected = e.value;
+            var text = document.getElementById("purpose").value;
+            if (selected == 0) {
+                document.getElementById("alertType").style.display = "block";
+            }
+            else if (text == "") {
+                document.getElementById("alertType").style.display = "none";
+                document.getElementById("alertPurpose").style.display = "block";
+            }
+            else {
+                document.getElementById("form").submit();
+            }
+        }
+    </script>
+</body>
+
+</html>

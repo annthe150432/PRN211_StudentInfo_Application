@@ -1,0 +1,308 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Project.Models; 
+
+@{
+    Student student = ViewData["Student"] as Student;
+    Login login = ViewData["Login"] as Login;
+    String dob = (String)ViewBag.dob;
+    String doi = (String)ViewBag.doi;
+    String enrolldate = (String)ViewBag.enrolldate;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>FPT Portal</title>
+    <link rel="stylesheet" href="/view_prof/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/view_prof/assets/css/Contact-Form-Clean.css">
+    <link rel="stylesheet" href="/view_prof/assets/css/styles.css">
+</head>
+
+<body>
+    <h1 style="padding-left: 100px;"><br>FPT University Academic Portal<br><br></h1>
+    <nav class="navbar navbar-light navbar-expand-md border rounded shadow" style="background: rgb(96,242,252);">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Home</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav d-inline-flex float-right">
+                    <li class="nav-item shadow float-right"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">Information Access</a>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="/Home/Construction">Weekly Timetable</a><a class="dropdown-item" href="/Home/Construction">Exam Schedule</a></div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">Registration/Application</a>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="/Home/Construction">Suspend semester</a><a class="dropdown-item" href="/Home/Construction">Register Course</a><a class="dropdown-item" href="/Application/Create">Send Application</a><a class="dropdown-item" href="/Application/List">View Application</a></div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">Others</a>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="/Profile/Views">Student Profile</a><a class="dropdown-item" href="/Profile/Edit">Update Profile</a><a class="dropdown-item" href="/Home/Construction">Certificate</a></div>
+                    </li>
+                </ul>
+            </div>
+            <section style="width: 234px;height: 52px;padding-top: 13px;"><a class="text-monospace shadow d-inline-block" href="/Profile/Views" style="width: 76px;">Profile</a><a class="text-monospace shadow d-inline-block" href="#" style="width: 76px;">Campus</a><a class="text-monospace shadow d-inline-block" href="/Home/Logout" style="margin-left: 0px;width: 76px;">Logout</a></section>
+        </div>
+    </nav>
+    <section style="height: 370px;padding-left: 80px;padding-right: 80px;">
+        <h2 style="height: 100px;"><br>Student information<br><br></h2>
+        <div class="d-lg-flex"><img width="150px" height="200px" src="@student.Avatar"></div>
+    </section>
+    <main class="d-lg-flex justify-content-lg-center align-items-lg-start" style="border-right-width: 2.4px;height: 950px;">
+        <div class="col d-inline-block" style="width: 370px;margin-left: 32px;border-right-style: dashed;padding-right: 0;padding-left: 0;">
+            <div class="shadow">
+                <h4 style="border-bottom-style: solid;border-bottom-color: rgb(33,37,41);">Profile</h4>
+            </div>
+            <div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td style="width: 150px;">Full name</td>
+                                <td>@student.Fullname</td>
+                            </tr>
+                            <tr>
+                                <td>Date of Birth</td>
+                                <td>@dob</td>
+                            </tr>
+                            <tr>
+                                <td>Gender</td>
+                                @if ((bool)student.Gender)
+                                {
+                                    <td>Male</td>
+                                }
+                                else
+                                {
+                                    <td>Female</td>
+                                }
+
+                            </tr>
+                            <tr>
+                                <td>ID Card</td>
+                                <td>@student.Identity</td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td>@student.Address</td>
+                            </tr>
+                            <tr>
+                                <td>Phone number</td>
+                                <td>@student.Phonenumber</td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td>@student.Email</td>
+                            </tr>
+                            <tr>
+                                <td>Date of Issue</td>
+                                <td>@doi</td>
+                            </tr>
+                            <tr>
+                                <td>Place of Issue</td>
+                                <td>@student.Poi</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <h4 style="border-bottom-style: solid;">Parent</h4>
+            </div>
+            <div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td style="width: 130px;">Name</td>
+                                <td>@student.ParentName</td>
+                            </tr>
+                            <tr>
+                                <td>Phone number</td>
+                                <td>@student.ParentPhone</td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td>@student.ParentAddress</td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td>@student.ParentEmail</td>
+                            </tr>
+                            <tr>
+                                <td>Job</td>
+                                <td>@student.ParentJob</td>
+                            </tr>
+                            <tr>
+                                <td>Place of work</td>
+                                <td>@student.ParentPow</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col d-inline-block" style="width: 370px;margin-left: 32px;border-right-style: dashed;padding-right: 0;padding-left: 0;">
+            <div class="shadow">
+                <h4 style="border-bottom-style: solid;border-bottom-color: rgb(33,37,41);">Academic</h4>
+            </div>
+            <div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td style="width: 150px;">Roll Number</td>
+                                <td>@login.RollNumber</td>
+                            </tr>
+                            <tr>
+                                <td>Old RollNumber</td>
+                                <td>@student.OldId</td>
+                            </tr>
+                            <tr>
+                                <td>Member Code</td>
+                                <td>@student.MemberCode</td>
+                            </tr>
+                            <tr>
+                                <td>Enroll Date</td>
+                                <td>@enrolldate</td>
+                            </tr>
+                            <tr>
+                                <td>Mode</td>
+                                <td>@student.Mode</td>
+                            </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td>@student.Status</td>
+                            </tr>
+                            <tr>
+                                <td>Current Term No</td>
+                                <td>@student.CurrentTerm</td>
+                            </tr>
+                            <tr>
+                                <td>Major</td>
+                                <td>@student.Major</td>
+                            </tr>
+                            <tr>
+                                <td>Curriculumn</td>
+                                <td>@student.Curriculumn</td>
+                            </tr>
+                            <tr>
+                                <td>Capstone Project</td>
+                                <td>@student.Capstone</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <h4 style="border-bottom-style: solid;">Finance</h4>
+            </div>
+            <div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td style="width: 130px;">Term Paid</td>
+                                <td>@student.CurrentTerm</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Account balance (Số dư tài khoản):&nbsp;<span>@student.CurrentTerm</span>&nbsp;VNĐ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col d-inline-block" style="width: 370px;margin-left: 32px;border-right-style: dashed;padding-right: 0;padding-left: 0;">
+            <div class="shadow">
+                <h4 style="border-bottom-style: solid;border-bottom-color: rgb(33,37,41);">Other</h4>
+            </div>
+            <div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td style="width: 200px;">Ngành cũ</td>
+                                <td>@student.OldMajor</td>
+                            </tr>
+                            <tr>
+                                <td>QĐ Chuyển ngành</td>
+                                <td>@student.ChangeMajorConfirm</td>
+                            </tr>
+                            <tr>
+                                <td>QĐ Công nhận SVCQ</td>
+                                <td>@student.Svcqconfirm</td>
+                            </tr>
+                            <tr>
+                                <td>Ngày công nhận SVCQ</td>
+                                <td>@student.Svcqdate</td>
+                            </tr>
+                            <tr>
+                                <td>QĐ Công nhận SV dự bị</td>
+                                <td>@student.PreparedSvconfirm</td>
+                            </tr>
+                            <tr>
+                                <td>Hạn 7 năm</td>
+                                <td>@student.SevenYear</td>
+                            </tr>
+                            <tr>
+                                <td>Lớp chính</td>
+                                <td>@student.MainClass</td>
+                            </tr>
+                            <tr>
+                                <td>Loại tài chính</td>
+                                <td>@student.FinancialType</td>
+                            </tr>
+                            <tr>
+                                <td>QĐ Thôi học</td>
+                                <td>@student.DropConfirm</td>
+                            </tr>
+                            <tr>
+                                <td>QĐ Chuyển cơ sở</td>
+                                <td>@student.ChangeCity</td>
+                            </tr>
+                            <tr>
+                                <td>QĐ BL/Exchange/kỷ luật</td>
+                                <td>@student.SuspendConfirm</td>
+                            </tr>
+                            <tr>
+                                <td>QĐ Công nhận TN</td>
+                                <td>@student.Tnconfirm</td>
+                            </tr>
+                            <tr>
+                                <td>QĐ Rejoin</td>
+                                <td>@student.RejoinConfirm</td>
+                            </tr>
+                            <tr>
+                                <td>TT Đến</td>
+                                <td>@student.Ttto</td>
+                            </tr>
+                            <tr>
+                                <td>Chuyên ngành</td>
+                                <td>@student.Specialize</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer style="padding-right: 80px;padding-left: 80px;">
+        <p><strong>Mọi góp ý, thắc mắc xin liên hệ:&nbsp;</strong>Phòng dịch vụ sinh viên: Email:&nbsp;<a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a>. Điện thoại:&nbsp;<strong>(024)7308.13.13</strong><br></p>
+        <p class="d-lg-flex justify-content-lg-center">© Powered by&nbsp;<a href="http://fpt.edu.vn/">FPT University</a>&nbsp;|&nbsp;&nbsp;<a href="http://cms.fpt.edu.vn/">CMS</a>&nbsp;|&nbsp;&nbsp;<a href="http://library.fpt.edu.vn/">library</a>&nbsp;|&nbsp;&nbsp;<a href="http://library.books24x7.com/">books24x7</a><br></p>
+    </footer>
+    <script src="/view_prof/assets/js/jquery.min.js"></script>
+    <script src="/view_prof/assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
