@@ -13,7 +13,7 @@ pool:
 stages:
 - stage: Compile
   jobs:
-  - job: Compile work
+  - job: Compile_Jobs
     steps:
     - script: |
         echo Add other tasks to build, test, and deploy your project.
