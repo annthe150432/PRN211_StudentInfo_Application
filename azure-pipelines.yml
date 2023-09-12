@@ -1,4 +1,5 @@
 # Starter pipeline
+
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
@@ -15,11 +16,11 @@ stages:
   jobs:
   - job: Compile_Jobs
     steps:
-    - script: |
-        echo Add other tasks to build, test, and deploy your project.
-        echo See
-      displayName: 'Run a multi-line script'
-
-    - script: dotnet build
-      displayName: 'Build'
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'build'
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'publish'
+        publishWebProjects: true
 
