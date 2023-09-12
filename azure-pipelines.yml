@@ -9,11 +9,17 @@ trigger:
 pool:
   vmImage: windows-latesr
 
-steps:
-- script: echo Student Info
-  displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+stages:
+- stage: Compile
+  jobs:
+  - job: Compile work
+    steps:
+    - script: |
+        echo Add other tasks to build, test, and deploy your project.
+        echo See
+      displayName: 'Run a multi-line script'
+
+    - script: dotnet build
+      displayName: 'Build'
+
